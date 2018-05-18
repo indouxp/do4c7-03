@@ -1,0 +1,16 @@
+---
+- hosts: all
+
+  tasks:
+    - name: Create a file labeled 98-oracle-kernel.conf within /etc/sysctl.d/
+      copy: 
+        src: ../files/98-oracle-kernel.conf
+        dest: /etc/sysctl.d/98-oracle-kernel.conf
+        mode: 0644
+        owner: root
+        group: root
+    - name: sysctl -p 
+      shell: sysctl -p /etc/sysctl.d/98-oracle-kernel.conf
+      changed_when: false
+      register: sysctl_check
+      failed_when: sysctl_check.rc not in [ 0 ]

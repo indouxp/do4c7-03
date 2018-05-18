@@ -1,0 +1,54 @@
+---
+- hosts: all
+
+#  vars:
+#    groups:
+#      oinstall:
+#        name: oinstall
+#        gid: 54321
+#      dba:
+#        name: dba
+#        gid: 54322 
+#      asmdba:
+#        name: asmdba
+#        gid: 54323 
+#      asmoper:
+#        name: asmoper
+#        gid: 54324 
+#      asmadmin:
+#        name: asmadmin
+#        gid: 54325 
+#      oper:
+#        name: oper
+#        gid: 54326
+#      backupdba:
+#        name: backupdba
+#        gid: 54327
+#      dgdba:
+#        name: dgdba
+#        gid: 54328
+#      kmdba:
+#        name: kmdba
+#        gid: 54329
+#      racdba:
+#        name: racdba 
+#        gid: 54330
+#
+  tasks:
+    - name: group
+      group: 
+        name: "{{ item.name }}"
+        gid: "{{ item.gid }}"
+        state: present
+      with_items:
+        - { name: oinstall, gid: 54321 }
+        - { name: dba, gid: 54322 }
+        - { name: asmdba, gid: 54323 }
+        - { name: asmoper, gid: 54324 }
+        - { name: asmadmin, gid: 54325 }
+        - { name: oper, gid: 54326 }
+        - { name: backupdba, gid: 54327 }
+        - { name: dgdba, gid: 54328 }
+        - { name: kmdba, gid: 54329 }
+        - { name: racdba, gid: 54330 }
+ 

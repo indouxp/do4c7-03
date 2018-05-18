@@ -1,0 +1,37 @@
+---
+- hosts: all
+
+  tasks:
+    - name: rsp install 
+      copy: 
+        src: ../files/oracle_install.rsp
+        dest: /home/oracle/oracle_install.rsp
+        mode: 0644
+        owner: oracle
+        group: oinstall
+
+    - name: shell install 
+      copy: 
+        src: ../files/oracle_install.sh
+        dest: /home/oracle/oracle_install.sh
+        mode: 0755
+        owner: oracle
+        group: oinstall
+
+    - name: rsp install 
+      become: True
+      become_user: oracle
+      shell: /home/oracle/oracle_install.sh
+      changed_when: False
+      register: runinstaller_status
+      failed_when: runinstaller_status.rc not in [ 0, 254 ]
+
+    - name: /u01/app/oraInventory/orainstRoot.sh
+      shell: /u01/app/oraInventory/orainstRoot.sh
+      register: orainstRoot_status
+      failed_when: orainstRoot_status.rc not in [ 0 ]
+
+    - name: /u01/app/oracle/product/12.1.0/db_1/root.sh
+      shell: /u01/app/oracle/product/12.1.0/db_1/root.sh
+      register: Root_status
+      failed_when: Root_status.rc not in [ 0 ]

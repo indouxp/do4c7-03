@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: True
+  become_user: oracle
+
+  tasks:
+    - name: unzip 1/2
+      unarchive: src=../files/linuxamd64_12102_database_1of2.zip dest=/home/oracle creates=/home/oracle/linuxamd64_12102_database_1of2.zip
+    - name: unzip 2/2
+      unarchive: src=../files/linuxamd64_12102_database_2of2.zip dest=/home/oracle creates=/home/oracle/linuxamd64_12102_database_2of2.zip

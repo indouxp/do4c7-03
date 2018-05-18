@@ -1,0 +1,27 @@
+---
+- hosts: all
+
+  tasks:
+    - name: copy run-dbca.sh
+      copy: 
+        src: ../files/run-dbca.sh
+        dest: /home/oracle/run-dbca.sh
+        mode: 0755
+        owner: oracle
+        group: oinstall
+
+    - name: mkdir /oradata
+      file:
+        dest: /oradata
+        state: directory
+        owner: oracle
+        group: oinstall
+        mode: 0775
+
+    - name: run run-dbca.sh
+      become: True
+      become_user: oracle
+      shell: /home/oracle/run-dbca.sh
+      changed_when: False
+      register: dbca_check
+      failed_when: dbca_check.rc not in [ 0 ]

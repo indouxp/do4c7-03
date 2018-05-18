@@ -1,0 +1,16 @@
+---
+- hosts: all
+
+  tasks:
+    - name: copy change-sysctl.sh
+      copy: 
+        src: ../files/change-sysctl.sh
+        dest: /home/oracle/change-sysctl.sh
+        mode: 0755
+        owner: root
+        group: root
+    - name: run change-sysctl.sh
+      shell: /home/oracle/change-sysctl.sh
+      changed_when: False
+      register: sysctl_check
+      failed_when: sysctl_check.rc not in [ 0 ]

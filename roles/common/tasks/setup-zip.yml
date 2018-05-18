@@ -1,0 +1,18 @@
+---
+- hosts: all
+
+  tasks:
+    - name: copy zip
+      copy: 
+        src: ../files/linuxamd64_12102_database_1of2.zip
+        dest: /tmp/linuxamd64_12102_database_1of2.zip
+        mode: 0644
+        owner: oracle
+        group: oinstall
+    - name: copy zip
+      copy: 
+        src: ../files/linuxamd64_12102_database_2of2.zip
+        dest: /tmp/linuxamd64_12102_database_2of2.zip
+        mode: 0644
+        owner: oracle
+        group: oinstall

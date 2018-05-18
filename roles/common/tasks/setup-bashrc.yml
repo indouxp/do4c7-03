@@ -1,0 +1,19 @@
+---
+- hosts: all
+
+  tasks:
+    - name: copy bashrc
+      copy: 
+        src: ../files/bashrc.sh
+        dest: /home/oracle/bashrc.sh
+        mode: 0755
+        owner: oracle
+        group: oinstall
+
+    - name: run bashrc.sh
+      become: True
+      become_user: oracle
+      shell: /home/oracle/bashrc.sh
+      changed_when: False
+      register: bashrc_check
+      failed_when: bashrc_check.rc not in [ 0 ]

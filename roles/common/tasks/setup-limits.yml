@@ -1,0 +1,16 @@
+---
+- hosts: all
+
+  tasks:
+    - name: copy change-limits.sh
+      copy: 
+        src: ../files/change-limits.sh
+        dest: /home/oracle/change-limits.sh
+        mode: 0755
+        owner: root
+        group: root
+    - name: run change-limits.sh
+      shell: /home/oracle/change-limits.sh
+      changed_when: False
+      register: limits_check
+      failed_when: limits_check.rc not in [ 0 ]

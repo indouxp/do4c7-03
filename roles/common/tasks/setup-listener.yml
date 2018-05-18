@@ -1,0 +1,18 @@
+---
+- hosts: all
+
+  vars:
+    net_service_name: orcl
+    #ip_address: 167.99.76.151
+    ip_address: centos-s-2vcpu-4gb-sgp1-01
+    port: 1521
+    gdb: orcl
+
+  tasks:
+    - name: setup listener.ora
+      template:
+        src: ../files/listener.j2
+        dest: /u01/app/oracle/product/12.2.0/db_1/network/admin/listener.ora
+        owner: oracle
+        group: oinstall
+        mode: 0644

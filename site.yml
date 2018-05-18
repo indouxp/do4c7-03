@@ -1,0 +1,23 @@
+---
+
+- hosts: all
+  become: no
+  vars:
+    hosts:
+      - 206.189.92.148
+
+#- import_playbook: roles/common/tasks/setup-init.yml
+#- import_playbook: roles/common/tasks/setup-swap.yml
+#- import_playbook: roles/common/tasks/setup-virtual-memory.yml
+#- import_playbook: roles/common/tasks/setup-groups.yml
+#- import_playbook: roles/common/tasks/setup-users.yml
+#- import_playbook: roles/common/tasks/mkdir.yml
+#- import_playbook: roles/common/tasks/unzip-zip.yml
+#- import_playbook: roles/common/tasks/install-rpms.yml
+#- import_playbook: roles/common/tasks/setup-sysctl.yml
+#- import_playbook: roles/common/tasks/setup-limits.yml
+#- import_playbook: roles/common/tasks/setup-rsp.yml
+#- import_playbook: roles/common/tasks/setup-bashrc.yml
+#- import_playbook: roles/common/tasks/run-dbca.yml
+- import_playbook: roles/common/tasks/setup-tnsnames.yml
+- import_playbook: roles/common/tasks/setup-listener.yml

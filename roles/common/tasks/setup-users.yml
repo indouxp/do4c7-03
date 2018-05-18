@@ -1,0 +1,11 @@
+---
+- hosts: all
+
+  tasks:
+    - name: user
+      user:
+        name: oracle
+        uid: 54321
+        group: oinstall
+        groups: dba,asmdba,asmoper,asmadmin,oper,backupdba,dgdba,kmdba,racdba
+        password: oracle

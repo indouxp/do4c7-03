@@ -1,0 +1,2 @@
+[do]
+206.189.92.148 ansible_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa_do4sakura

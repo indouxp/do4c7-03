@@ -1,0 +1,7 @@
+{{ net_service_name }} =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = {{ ip_address }})(PORT = {{ port }}))
+    (CONNECT_DATA =
+      (SERVICE_NAME = {{ net_service_name }})
+    )
+  )

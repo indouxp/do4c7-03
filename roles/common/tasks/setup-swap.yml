@@ -1,0 +1,16 @@
+---
+- hosts: all
+
+  tasks:
+    - name: copy make swap
+      copy: 
+        src: ../files/make-swap.sh
+        dest: /root/setup/make-swap.sh
+        mode: 0755
+        owner: root
+        group: root
+    - name: run make swap
+      shell: /root/setup/make-swap.sh 
+      changed_when: false
+      register: swap_check
+      failed_when: swap_check.rc not in [ 0 ]

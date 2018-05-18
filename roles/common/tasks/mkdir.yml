@@ -1,0 +1,20 @@
+---
+- hosts: all
+
+  tasks:
+
+    - name: mkdir /u01/app/oracle
+      file:
+        dest: /u01/app/oracle
+        state: directory
+        owner: oracle
+        group: oinstall
+        mode: 0755
+
+    - name: mkdir /u01/app/oraInventory
+      file:
+        dest: /u01/app/oraInventory
+        state: directory
+        owner: oracle
+        group: oinstall
+        mode: 0775
