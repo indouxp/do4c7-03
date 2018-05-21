@@ -6,6 +6,10 @@
 ###############################################################################
 NAME=${0##*/}
 
+SWAPFILENAME=/SWAPFILE
+SIZE=4096
+SIZE=6144
+
 NOW=`swapon -s |
      awk 'BEGIN{
             sum = 0;
@@ -21,14 +25,14 @@ NOW=`swapon -s |
 set -eu
 
 if [ "${NOW:?}" = "0" ]; then
-  if dd if=/dev/zero of=/SWAPFILE count=4096 bs=1M; then
-    mkswap /SWAPFILE && swapon /SWAPFILE
-    if grep SWAPFILE /etc/fstab; then
+  if dd if=/dev/zero of=/SWAPFILE count=${SIZE:?} bs=1M; then
+    mkswap ${SWAPFILENAME:?} && swapon ${SWAPFILENAME:?}
+    if grep ${SWAPFILENAME:?} /etc/fstab; then
       :
     else
       cp -p /etc/fstab /etc/fstab.bk`date '+%Y%m%d'`
       cat <<EOT >> /etc/fstab
-/SWAPFILE swap swap defaults 0 0
+${SWAPFILENAME:?} swap swap defaults 0 0
 EOT
     fi
   fi
